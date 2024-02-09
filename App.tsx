@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,7 +17,7 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import MyHeader from './MyHeader';
 import Todo from './Todo';
-const todos = [
+const data = [
   {
     text: 'create to do app',
     isDone: false,
@@ -33,9 +33,18 @@ const todos = [
 ];
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const [todos, setTodos] = useState(data);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+  const addNew = () => {
+    setTodos([
+      ...todos,
+      {
+        text: 'create to do app1',
+        isDone: false,
+      },
+    ]);
   };
 
   return (
@@ -47,7 +56,7 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <MyHeader />
+        <MyHeader addNew={addNew} />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

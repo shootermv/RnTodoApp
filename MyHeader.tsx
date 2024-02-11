@@ -27,23 +27,6 @@ const MyHeader = ({
 export default MyHeader;
 const styles = StyleSheet.create({
   mainContainer: {},
-  filtersContainer: {
-    flexDirection: 'row',
-    gap: 2,
-    backgroundColor: '#333',
-  },
-  filterButton: {
-    paddingVertical: 6,
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'lightgray',
-  },
-  activeFilter: {
-    backgroundColor: 'gray',
-  },
-  activeFilterText: {
-    color: '#fff',
-  },
   text: {color: '#000'},
   buttonText: {color: '#fff'},
   title: {

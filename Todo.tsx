@@ -5,8 +5,8 @@ const Todo = ({
   itm,
   edit,
 }: {
-  itm: {id: number; text: string; isDone: boolean};
-  edit: (itm: {id: number; text: string; isDone: boolean}) => void;
+  itm: {id: string; text: string; isDone: boolean};
+  edit: (itm: {id: string; text: string; isDone: boolean}) => void;
 }) => {
   const toggleSwitch = () => {
     edit({...itm, isDone: !itm.isDone});

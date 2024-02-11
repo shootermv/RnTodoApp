@@ -18,19 +18,20 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import MyHeader from './MyHeader';
 import Todo from './Todo';
-const data = [
+import {Item} from './Item';
+const data: Item[] = [
   {
-    id: 1,
+    id: `1`,
     text: 'create to do app',
     isDone: false,
   },
   {
-    id: 2,
+    id: `2`,
     text: 'try using basic RN components',
     isDone: false,
   },
   {
-    id: 3,
+    id: `3`,
     text: 'publish article about it',
     isDone: true,
   },
@@ -46,15 +47,15 @@ function App(): React.JSX.Element {
     setTodos([
       ...todos,
       {
-        id: todos.length + 1,
+        id: `${todos.length + 1}`,
         text,
         isDone: false,
       },
     ]);
   };
-  const edit = (item: {id: number; text: string; isDone: boolean}) => {
+  const edit = (item: Item) => {
     setTodos(
-      todos.map(origItm => {
+      todos.map((origItm: Item) => {
         if (origItm.id === item.id) {
           return item;
         }

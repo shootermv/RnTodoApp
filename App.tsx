@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -19,16 +19,19 @@ import MyHeader from './MyHeader';
 import Todo from './Todo';
 const data = [
   {
+    id: 1,
     text: 'create to do app',
     isDone: false,
   },
   {
+    id: 2,
     text: 'try using basic RN components',
     isDone: false,
   },
   {
+    id: 3,
     text: 'publish article about it',
-    isDone: false,
+    isDone: true,
   },
 ];
 function App(): React.JSX.Element {
@@ -37,16 +40,39 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const [activeFilter, setAtiveFilter] = useState('All');
   const addNew = () => {
     setTodos([
       ...todos,
       {
-        text: 'create to do app1',
+        id: todos.length + 1,
+        text: `create to do app1 ${todos.length + 1}`,
         isDone: false,
       },
     ]);
   };
-
+  const edit = (item: {id: number; text: string; isDone: boolean}) => {
+    setTodos(
+      todos.map(origItm => {
+        if (origItm.id === item.id) {
+          return item;
+        }
+        return origItm;
+      }),
+    );
+  };
+  const changeFilter = (filter: string) => {
+    setAtiveFilter(filter);
+  };
+  const filteredTodos = useMemo(() => {
+    return todos.filter(({isDone}) => {
+      console.log('a', activeFilter);
+      if (activeFilter !== 'All') {
+        return activeFilter === 'Active' ? !isDone : isDone;
+      }
+      return true;
+    });
+  }, [activeFilter, todos]);
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -56,13 +82,17 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <MyHeader addNew={addNew} />
+        <MyHeader
+          addNew={addNew}
+          changeFilter={changeFilter}
+          activeFilter={activeFilter}
+        />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          {todos.map(itm => (
-            <Todo key={itm.text} itm={itm} />
+          {filteredTodos.map(itm => (
+            <Todo key={itm.text} itm={itm} edit={edit} />
           ))}
         </View>
       </ScrollView>

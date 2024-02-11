@@ -6,6 +6,8 @@
  */
 
 import React, {useMemo, useState} from 'react';
+import {v4 as uuidv4} from 'uuid';
+import 'react-native-get-random-values';
 import {
   SafeAreaView,
   ScrollView,
@@ -21,17 +23,17 @@ import Todo from './Todo';
 import {Item} from './Item';
 const data: Item[] = [
   {
-    id: `1`,
+    id: uuidv4(),
     text: 'create to do app',
     isDone: false,
   },
   {
-    id: `2`,
+    id: uuidv4(),
     text: 'try using basic RN components',
     isDone: false,
   },
   {
-    id: `3`,
+    id: uuidv4(),
     text: 'publish article about it',
     isDone: true,
   },
@@ -47,7 +49,7 @@ function App(): React.JSX.Element {
     setTodos([
       ...todos,
       {
-        id: `${todos.length + 1}`,
+        id: uuidv4(),
         text,
         isDone: false,
       },

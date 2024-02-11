@@ -1,24 +1,20 @@
 import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Filters from './Filters';
+import AddForm from './AddForm';
 
 const MyHeader = ({
   addNew,
   changeFilter,
   activeFilter,
 }: {
-  addNew: () => void;
+  addNew: (text: string) => void;
   changeFilter: (filter: string) => void;
   activeFilter: string;
 }) => {
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.container}>
-        <Text style={[styles.text, styles.title]}>header</Text>
-        <TouchableOpacity onPress={addNew} style={styles.button}>
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
-      </View>
+      <AddForm addNew={addNew} />
       <Filters changeFilter={changeFilter} activeFilter={activeFilter} />
     </View>
   );
@@ -27,21 +23,4 @@ const MyHeader = ({
 export default MyHeader;
 const styles = StyleSheet.create({
   mainContainer: {},
-  text: {color: '#000'},
-  buttonText: {color: '#fff'},
-  title: {
-    flex: 1,
-  },
-  button: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    backgroundColor: 'gray',
-  },
-  container: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderBottomColor: 'grey',
-    borderBottomWidth: 2,
-    flexDirection: 'row',
-  },
 });

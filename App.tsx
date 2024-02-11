@@ -42,12 +42,12 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const [activeFilter, setAtiveFilter] = useState('All');
-  const addNew = () => {
+  const addNew = (text: string) => {
     setTodos([
       ...todos,
       {
         id: todos.length + 1,
-        text: `create to do app1 ${todos.length + 1}`,
+        text,
         isDone: false,
       },
     ]);
@@ -62,12 +62,9 @@ function App(): React.JSX.Element {
       }),
     );
   };
-  const changeFilter = (filter: string) => {
-    setAtiveFilter(filter);
-  };
+  const changeFilter = (filter: string) => setAtiveFilter(filter);
   const filteredTodos = useMemo(() => {
     return todos.filter(({isDone}) => {
-      console.log('a', activeFilter);
       if (activeFilter !== 'All') {
         return activeFilter === 'Active' ? !isDone : isDone;
       }
@@ -91,7 +88,6 @@ function App(): React.JSX.Element {
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-
             flex: 1,
           }}>
           {filteredTodos.length > 0 ? (

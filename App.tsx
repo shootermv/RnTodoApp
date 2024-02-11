@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
+  Text,
   useColorScheme,
   View,
 } from 'react-native';
@@ -74,14 +75,14 @@ function App(): React.JSX.Element {
     });
   }, [activeFilter, todos]);
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={[backgroundStyle]}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+        style={[backgroundStyle]}>
         <MyHeader
           addNew={addNew}
           changeFilter={changeFilter}
@@ -90,10 +91,18 @@ function App(): React.JSX.Element {
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
+
+            flex: 1,
           }}>
-          {filteredTodos.map(itm => (
-            <Todo key={itm.text} itm={itm} edit={edit} />
-          ))}
+          {filteredTodos.length > 0 ? (
+            filteredTodos.map(itm => (
+              <Todo key={itm.text} itm={itm} edit={edit} />
+            ))
+          ) : (
+            <View>
+              <Text>No Results...</Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Filters from './Filters';
+import Filters from '../Filters';
 import AddForm from './AddForm';
 
 const MyHeader = ({

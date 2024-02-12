@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, Switch, StyleSheet} from 'react-native';
-
+import {Text, View, StyleSheet} from 'react-native';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const Todo = ({
   itm,
   edit,
@@ -15,13 +15,7 @@ const Todo = ({
   return (
     <View style={styles.container}>
       <Text style={styles.textContainer}>{itm.text}</Text>
-      <Switch
-        trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={itm.isDone ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={itm.isDone}
-      />
+      <BouncyCheckbox isChecked={itm.isDone} onPress={toggleSwitch} />
     </View>
   );
 };

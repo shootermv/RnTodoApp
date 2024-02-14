@@ -8,20 +8,23 @@ import {
 } from 'react-native';
 
 const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
-  const [text, onChangeText] = React.useState('');
+  const [newTodoText, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
       <View style={[styles.title]}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeText}
-          value={text}
+          value={newTodoText}
           placeholder="new todo..."
         />
       </View>
       <TouchableOpacity
         onPress={() => {
-          addNew(text);
+          if (!newTodoText) {
+            return;
+          }
+          addNew(newTodoText);
           onChangeText('');
         }}
         style={styles.button}>

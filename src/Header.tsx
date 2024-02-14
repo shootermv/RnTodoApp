@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import Filters from './Filters';
 import AddForm from './AddForm';
 
-const MyHeader = ({
+const Header = ({
   addNew,
   changeFilter,
   activeFilter,
@@ -20,7 +20,7 @@ const MyHeader = ({
   );
 };
 
-export default MyHeader;
+export default Header;
 const styles = StyleSheet.create({
   mainContainer: {},
 });

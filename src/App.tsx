@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import MyHeader from './MyHeader';
+import Header from './Header';
 import Todo from './Todo';
 import {Item} from './Item';
 const data: Item[] = [
@@ -83,7 +83,7 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={[backgroundStyle]}>
-        <MyHeader
+        <Header
           addNew={addNew}
           changeFilter={changeFilter}
           activeFilter={activeFilter}

@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ViewStyle,
+  useColorScheme,
+} from 'react-native';
+import MyText from './MyText';
 
 const Filters = ({
   changeFilter,
@@ -8,6 +15,7 @@ const Filters = ({
   changeFilter: (filter: string) => void;
   activeFilter: string;
 }) => {
+  const isDarkMode = useColorScheme() === 'dark';
   const filters = ['All', 'Active', 'Done'];
   return (
     <View style={styles.filtersContainer}>
@@ -19,12 +27,16 @@ const Filters = ({
             styles.filterButton,
             filterText === activeFilter ? styles.activeFilter : {},
           ]}>
-          <Text
-            style={[
-              filterText === activeFilter ? styles.activeFilterText : {},
-            ]}>
+          <MyText
+            style={
+              [
+                filterText === activeFilter
+                  ? (styles.activeFilterText as ViewStyle)
+                  : ({color: isDarkMode ? '#000' : '#333'} as ViewStyle),
+              ] as ViewStyle[]
+            }>
             {filterText}
-          </Text>
+          </MyText>
         </TouchableOpacity>
       ))}
     </View>

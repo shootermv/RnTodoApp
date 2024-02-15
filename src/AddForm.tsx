@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import MyView from './MyView';
 
 const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
   const [newTodoText, onChangeText] = React.useState('');
   return (
-    <View style={styles.container}>
+    <MyView style={styles.container}>
       <View style={[styles.title]}>
         <TextInput
           style={styles.input}
@@ -30,7 +31,7 @@ const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
         style={styles.button}>
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
-    </View>
+    </MyView>
   );
 };
 

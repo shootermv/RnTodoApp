@@ -12,7 +12,6 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  Text,
   useColorScheme,
   View,
 } from 'react-native';
@@ -21,6 +20,8 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Header from './Header';
 import Todo from './Todo';
 import {Item} from './Item';
+import MyText from './MyText';
+import MyView from './MyView';
 const data: Item[] = [
   {
     id: uuidv4(),
@@ -98,9 +99,18 @@ function App(): React.JSX.Element {
               <Todo key={itm.text} itm={itm} edit={edit} />
             ))
           ) : (
-            <View>
-              <Text>No Results...</Text>
-            </View>
+            <MyView
+              style={{
+                padding: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <MyText style={{textAlign: 'center'}}>
+                {todos.length === 0
+                  ? 'No Todos yet, you may add some'
+                  : 'No Results...'}
+              </MyText>
+            </MyView>
           )}
         </View>
       </ScrollView>

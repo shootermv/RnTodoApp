@@ -22,23 +22,7 @@ import Todo from './Todo';
 import {Item} from './Item';
 import MyText from './MyText';
 import MyView from './MyView';
-const data: Item[] = [
-  {
-    id: uuidv4(),
-    text: 'create to do app',
-    isDone: false,
-  },
-  {
-    id: uuidv4(),
-    text: 'try using basic RN components',
-    isDone: false,
-  },
-  {
-    id: uuidv4(),
-    text: 'publish article about it',
-    isDone: true,
-  },
-];
+const data: Item[] = [];
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [todos, setTodos] = useState(data);
@@ -82,8 +66,8 @@ function App(): React.JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={[backgroundStyle]}>
+        contentContainerStyle={{flexGrow: 1}}
+        style={[backgroundStyle, {borderWidth: 1}]}>
         <Header
           addNew={addNew}
           changeFilter={changeFilter}
@@ -104,10 +88,11 @@ function App(): React.JSX.Element {
                 padding: 20,
                 alignItems: 'center',
                 justifyContent: 'center',
+                backgroundColor: 'white',
               }}>
               <MyText style={{textAlign: 'center'}}>
                 {todos.length === 0
-                  ? 'No Todos yet, you may add some'
+                  ? 'No Todos yet, go ahead and add some!'
                   : 'No Results...'}
               </MyText>
             </MyView>

@@ -5,16 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  useColorScheme,
 } from 'react-native';
 import MyView from './MyView';
 
 const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
   const [newTodoText, onChangeText] = React.useState('');
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <MyView style={styles.container}>
       <View style={[styles.title]}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: isDarkMode ? '#fff' : '#000'}]}
           onChangeText={onChangeText}
           value={newTodoText}
           placeholder="new todo..."
@@ -37,13 +39,13 @@ const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
 
 export default AddForm;
 const styles = StyleSheet.create({
-  input: {color: '#000', borderWidth: 1},
+  input: {borderWidth: 5},
   buttonText: {color: '#fff', fontSize: 37},
   title: {
     flex: 1,
   },
   button: {
-    paddingVertical: 1,
+    paddingVertical: 0,
     paddingHorizontal: 13,
     backgroundColor: 'gray',
   },

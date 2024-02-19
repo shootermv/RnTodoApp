@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import 'react-native-get-random-values';
 import {
@@ -15,21 +15,29 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+import * as RNLocalize from 'react-native-localize';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Header from './Header';
 import Todo from './Todo';
 import {Item} from './Item';
-import MyText from './MyText';
-import MyView from './MyView';
+
 const data: Item[] = [];
+import i18n from './i18n';
+import NoTodos from './NoTodos';
+import {useTranslation} from 'react-i18next';
 function App(): React.JSX.Element {
+  const {t} = useTranslation();
+  useEffect(() => {
+    // Set the initial language based on device locale
+    const locale = RNLocalize.getLocales()[0].languageCode;
+    i18n.changeLanguage(locale);
+  }, []);
   const isDarkMode = useColorScheme() === 'dark';
   const [todos, setTodos] = useState(data);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const [activeFilter, setAtiveFilter] = useState('All');
+  const [activeFilter, setAtiveFilter] = useState(t('All'));
   const addNew = (text: string) => {
     setTodos([
       ...todos,
@@ -53,12 +61,12 @@ function App(): React.JSX.Element {
   const changeFilter = (filter: string) => setAtiveFilter(filter);
   const filteredTodos = useMemo(() => {
     return todos.filter(({isDone}) => {
-      if (activeFilter !== 'All') {
-        return activeFilter === 'Active' ? !isDone : isDone;
+      if (activeFilter !== t('All')) {
+        return activeFilter === t('Active') ? !isDone : isDone;
       }
       return true;
     });
-  }, [activeFilter, todos]);
+  }, [activeFilter, todos, t]);
   return (
     <SafeAreaView style={[backgroundStyle]}>
       <StatusBar
@@ -83,19 +91,7 @@ function App(): React.JSX.Element {
               <Todo key={itm.text} itm={itm} edit={edit} />
             ))
           ) : (
-            <MyView
-              style={{
-                padding: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'white',
-              }}>
-              <MyText style={{textAlign: 'center'}}>
-                {todos.length === 0
-                  ? 'No Todos yet, go ahead and add some!'
-                  : 'No Results...'}
-              </MyText>
-            </MyView>
+            <NoTodos todos={todos} />
           )}
         </View>
       </ScrollView>

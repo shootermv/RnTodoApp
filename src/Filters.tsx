@@ -7,6 +7,7 @@ import {
   useColorScheme,
 } from 'react-native';
 import MyText from './MyText';
+import {useTranslation} from 'react-i18next';
 
 const Filters = ({
   changeFilter,
@@ -15,8 +16,9 @@ const Filters = ({
   changeFilter: (filter: string) => void;
   activeFilter: string;
 }) => {
+  const {t} = useTranslation();
   const isDarkMode = useColorScheme() === 'dark';
-  const filters = ['All', 'Active', 'Done'];
+  const filters = [t('All'), t('Active'), t('Done')];
   return (
     <View style={styles.filtersContainer}>
       {filters.map(filterText => (

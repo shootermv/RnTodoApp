@@ -8,22 +8,26 @@ import {
   useColorScheme,
 } from 'react-native';
 import MyView from './MyView';
+import {useTranslation} from 'react-i18next';
 
 const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
+  const {t} = useTranslation();
   const [newTodoText, onChangeText] = React.useState('');
   const isDarkMode = useColorScheme() === 'dark';
+  const adaptedStyle = {color: isDarkMode ? '#fff' : '#000'};
   return (
     <MyView style={styles.container}>
       <View style={[styles.title]}>
         <TextInput
-          style={[styles.input, {color: isDarkMode ? '#fff' : '#000'}]}
+          style={[styles.input, adaptedStyle]}
           onChangeText={onChangeText}
           value={newTodoText}
-          placeholder="new todo..."
+          placeholder={t('inputPlaceholder')}
         />
       </View>
       <TouchableOpacity
         onPress={() => {
+          console.log('New', newTodoText);
           if (!newTodoText) {
             return;
           }

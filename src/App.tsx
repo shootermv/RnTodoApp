@@ -37,6 +37,9 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const adaptiveStyle = {
+    backgroundColor: isDarkMode ? Colors.black : Colors.white,
+  };
   const [activeFilter, setAtiveFilter] = useState(t('All'));
   const addNew = (text: string) => {
     setTodos([
@@ -73,9 +76,7 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
-        style={[backgroundStyle, {borderWidth: 1}]}>
+      <ScrollView style={[backgroundStyle]}>
         <Header
           addNew={addNew}
           changeFilter={changeFilter}
@@ -83,7 +84,7 @@ function App(): React.JSX.Element {
         />
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            ...adaptiveStyle,
             flex: 1,
           }}>
           {filteredTodos.length > 0 ? (

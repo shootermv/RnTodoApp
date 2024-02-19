@@ -24,9 +24,7 @@ import {Item} from './Item';
 const data: Item[] = [];
 import i18n from './i18n';
 import NoTodos from './NoTodos';
-import {useTranslation} from 'react-i18next';
 function App(): React.JSX.Element {
-  const {t} = useTranslation();
   useEffect(() => {
     // Set the initial language based on device locale
     const locale = RNLocalize.getLocales()[0].languageCode;
@@ -40,7 +38,7 @@ function App(): React.JSX.Element {
   const adaptiveStyle = {
     backgroundColor: isDarkMode ? Colors.black : Colors.white,
   };
-  const [activeFilter, setAtiveFilter] = useState(t('All'));
+  const [activeFilter, setAtiveFilter] = useState('All');
   const addNew = (text: string) => {
     setTodos([
       ...todos,
@@ -64,12 +62,12 @@ function App(): React.JSX.Element {
   const changeFilter = (filter: string) => setAtiveFilter(filter);
   const filteredTodos = useMemo(() => {
     return todos.filter(({isDone}) => {
-      if (activeFilter !== t('All')) {
-        return activeFilter === t('Active') ? !isDone : isDone;
+      if (activeFilter !== 'All') {
+        return activeFilter === 'Active' ? !isDone : isDone;
       }
       return true;
     });
-  }, [activeFilter, todos, t]);
+  }, [activeFilter, todos]);
   return (
     <SafeAreaView style={[backgroundStyle]}>
       <StatusBar

@@ -27,7 +27,6 @@ const AddForm = ({addNew}: {addNew: (text: string) => void}) => {
       </View>
       <TouchableOpacity
         onPress={() => {
-          console.log('New', newTodoText);
           if (!newTodoText) {
             return;
           }

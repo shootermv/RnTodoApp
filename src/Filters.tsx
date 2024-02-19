@@ -18,7 +18,7 @@ const Filters = ({
 }) => {
   const {t} = useTranslation();
   const isDarkMode = useColorScheme() === 'dark';
-  const filters = [t('All'), t('Active'), t('Done')];
+  const filters = ['All', 'Active', 'Done'];
   return (
     <View style={styles.filtersContainer}>
       {filters.map(filterText => (
@@ -37,7 +37,7 @@ const Filters = ({
                   : ({color: isDarkMode ? '#000' : '#333'} as ViewStyle),
               ] as ViewStyle[]
             }>
-            {filterText}
+            {t(filterText)}
           </MyText>
         </TouchableOpacity>
       ))}
